@@ -2,6 +2,7 @@ package pl.zabrze.zs10.timepickerdatepicker4p;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -12,10 +13,13 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
 DatePicker datePickert;
 TimePicker timePicker;
 Button button;
+Button buttonDialog;
 TextView textView;
 TextView textView2;
     @Override
@@ -27,6 +31,30 @@ TextView textView2;
         button = findViewById(R.id.buttonDatePicker);
         textView = findViewById(R.id.textView);
         textView2 = findViewById(R.id.textView2);
+        buttonDialog = findViewById(R.id.buttonKal);
+        buttonDialog.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Calendar calendar = Calendar.getInstance();
+                        DatePickerDialog datePicker2 =
+                        new DatePickerDialog(
+                                MainActivity.this,
+                                new DatePickerDialog.OnDateSetListener() {
+                                    @Override
+                                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                                        calendar.set(Calendar.DAY_OF_MONTH,i2);
+                                        calendar.set(Calendar.MONTH,i1);
+                                        calendar.set(Calendar.YEAR,i);
+                                textView.setText(String.valueOf(calendar.get(Calendar.YEAR)));
+                                    }
+                                },2023,10,20
+
+                        );
+                        datePicker2.show();
+                    }
+                }
+        );
         button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
