@@ -10,6 +10,7 @@ import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 DatePicker datePickert;
@@ -37,6 +38,22 @@ TextView textView2;
                         int minuty = timePicker.getMinute();
                         int godziny = timePicker.getHour();
                         textView2.setText(String.format("%d:%02d",godziny,minuty));
+                    }
+                }
+        );
+        datePickert.setOnDateChangedListener(
+                new DatePicker.OnDateChangedListener() {
+                    @Override
+                    public void onDateChanged(DatePicker datePicker, int i, int i1, int i2) {
+                        Toast.makeText(MainActivity.this, String.valueOf(i)+" "+String.valueOf(i1)+" "+String.valueOf(i2), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        timePicker.setOnTimeChangedListener(
+                new TimePicker.OnTimeChangedListener() {
+                    @Override
+                    public void onTimeChanged(TimePicker timePicker, int i, int i1) {
+                        Toast.makeText(MainActivity.this, String.valueOf(i)+" "+String.valueOf(i1), Toast.LENGTH_SHORT).show();
                     }
                 }
         );
